@@ -40,7 +40,7 @@ export class AppComponent {
 
   public renderPng(): void {
     let chatOutput = document.getElementById('chatOutput') as HTMLElement;
-    chatOutput.setAttribute('style', 'overflow-y: visible !important; height: auto !important');
+    chatOutput.setAttribute('style', 'overflow-y: visible !important;');
     html2canvas(document.querySelector('#chatOutput'), {
       backgroundColor: null
     })

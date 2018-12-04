@@ -14,6 +14,9 @@ export class AppComponent {
   public chatlog: Chat[] = new Array<Chat>();
   public uploading: boolean = false;
 
+  public _savingChatlog: boolean = false;
+  public get savingChatlog(): boolean { return this._savingChatlog; }
+
   upload($event): any {
     this.uploading = true;
     this.chatlog = new Array<Chat>();
@@ -36,12 +39,15 @@ export class AppComponent {
   }
 
   public renderPng(): void {
+    let chatOutput = document.getElementById('chatOutput') as HTMLElement;
+    chatOutput.setAttribute('style', 'overflow-y: visible !important; height: auto !important');
     html2canvas(document.querySelector('#chatOutput'), {
       backgroundColor: null
     })
     .then(canvas => {
+      chatOutput.removeAttribute('style');
       saveAs.saveAs(canvas.toDataURL("image/png"), "rage-rp-chatlog-" + new Date().toUTCString());
-   })
+    });
   };
 
   private parseChatlog(content: string[]) {

@@ -41,7 +41,7 @@
       <div id="chatlog" *ngIf="chatlog.length > 0" class="col-10">
 
       </div>
-      <div id="chatOutput" class="ui inverted segment">
+      <div class="ui inverted segment">
         <div *ngIf="uploading" class="ui dimmer">
           <div class="content">
             <h2 class="ui inverted icon header">
@@ -49,16 +49,17 @@
             </h2>
           </div>
         </div>
-        <div *ngIf="chatlog.length > 0" class="left floated content">
-
-          <li *ngFor="let chat of chatlog">
-            <div [innerHTML]="chat.text | safeHtml">
-            </div>
-          </li>
+        <div class="left floated content">
+          <div id="chatOutput" *ngIf="chatlog.length > 0" >            
+            <li *ngFor="let chat of chatlog">
+              <div [innerHTML]="chat.text | safeHtml">
+              </div>
+            </li>
+          </div>
         </div>
       </div>
       <div class="ui bottom attached inverted segment">
-        <div class="ui right labeled icon green basic disabled fluid button">
+        <div class="ui right labeled icon green basic fluid button" (ngClass)="chatlog.length === 0 ? 'disabled' : ''" (click)="renderPng()">
           <i class="cloud download alternate icon"></i> Download
         </div>
       </div>
